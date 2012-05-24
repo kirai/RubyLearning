@@ -36,7 +36,12 @@ p Hash[text.split(" ").group_by{|elem| elem}.collect{|key, val|  [key, val.size]
 time = Benchmark.realtime { 10000.times { Hash[text.split(" ").group_by{|elem| elem}.collect{|key, val|  [key, val.size]}] }}
 p time
 
-p "Using inject"
+p "Using inject Carlos solution"
 p text.split(" ").inject({}) {|hash, key| hash.has_key?(key) ? hash[key] +=1 : hash[key] = 1; hash} 
 time = Benchmark.realtime { 10000.times { text.split(" ").inject({}){|hash, key| hash.has_key?(key) ? hash[key] +=1 : hash[key] = 1; hash} }}
+p time
+
+p "Using inject Chris solution using boolean || instead of .has_key?"
+p text.split(" ").inject({}) {|hash, value| hash[value] ||= 0; hash[value] += 1; hash;}
+time = Benchmark.realtime { 10000.times { text.split(" ").inject({}) {|hash, value| hash[value] ||= 0; hash[value] += 1; hash;} } }
 p time
