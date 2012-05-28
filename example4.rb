@@ -27,6 +27,11 @@ p text.split(' ').find_all{|word| items.include?(word)}.count
 time = Benchmark.realtime do 100000.times do text.split(' ').find_all{|word| items.include?(word)}.count; end; end
 p time
 
+p "Chris Regex in split based solution"
+p text.split(/(?=carlos|moreno|ojete)/).size
+time = Benchmark.realtime do 100000.times do text.split(/(?=carlos|moreno|ojete)/).size; end; end
+p time
+
 p "-----------------------------------------------------------"
 p "Keeping a count of the appearances of each word in the text"
 p "-----------------------------------------------------------"
